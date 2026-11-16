@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>PantryPal Dashboard</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">PantryPal</div>
+    <div class="menu">
+        <a href="/">Dashboard</a>
+        <a href="/pantry">Pantry</a>
+    </div>
+</nav>
+
+<main class="container">
+
+    <h1>Welcome to PantryPal 👋</h1>
+    <p class="subtitle">
+        จัดการคลังอาหารของครอบครัวได้ง่ายขึ้น
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>🥕 อาหารในคลัง</h3>
+            <h1>{{ total_items }}</h1>
+            <p>รายการทั้งหมด</p>
+            <a href="/pantry">ดูคลังอาหาร →</a>
+        </div>
+
+        <div class="card">
+            <h3>⏰ ใกล้หมดอายุ</h3>
+            <h1>{{ expiring_items }}</h1>
+            <p>รายการที่หมดอายุใน 3 วัน</p>
+            <a href="/pantry">ตรวจสอบ →</a>
+        </div>
+
+        <div class="card">
+            <h3>🍳 Recipes</h3>
+            <p>ค้นหาเมนูจากวัตถุดิบ</p>
+            <span>Coming Soon</span>
+        </div>
+
+        <div class="card">
+            <h3>🛒 Shopping List</h3>
+            <p>จัดการรายการซื้อของ</p>
+            <span>Coming Soon</span>
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes - PantryPal</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">PantryPal</div>
+    <div class="menu">
+        <a href="/">Dashboard</a>
+        <a href="/pantry">Pantry</a>
+        <a href="/recipes">Recipes</a>
+    </div>
+</nav>
+
+<main class="container">
+
+    <h1>My Recipes 🍳</h1>
+    <p class="subtitle">เมนูอาหารใน PantryPal</p>
+
+    <div class="cards">
+
+        {% for recipe in recipes %}
+
+        <div class="card">
+
+            <h3>{{ recipe.recipe_name }}</h3>
+
+            <p>{{ recipe.instructions }}</p>
+
+            <strong>วัตถุดิบ</strong>
+
+            <p>{{ recipe.ingredients or 'ยังไม่มีวัตถุดิบ' }}</p>
+
+        </div>
+
+        {% else %}
+
+        <p>ยังไม่มีสูตรอาหาร</p>
+
+        {% endfor %}
+
+    </div>
+
+</main>
+
+</body>
+</html>

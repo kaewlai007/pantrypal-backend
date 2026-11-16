@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories - PantryPal</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">PantryPal</div>
+    <div class="menu">
+        <a href="/">Dashboard</a>
+        <a href="/pantry">Pantry</a>
+        <a href="/recipes">Recipes</a>
+        <a href="/shopping">Shopping</a>
+        <a href="/family">Family</a>
+        <a href="/categories">Categories</a>
+    </div>
+</nav>
+
+<main class="container">
+
+    <h1>Food Categories 🥕</h1>
+    <p class="subtitle">หมวดหมู่วัตถุดิบในระบบ</p>
+
+    <div class="cards">
+
+        {% for category in categories %}
+
+        <div class="card">
+            <h3>{{ category.category_name }}</h3>
+            <p>จำนวนวัตถุดิบ</p>
+            <h1>{{ category.total_ingredients }}</h1>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</main>
+
+</body>
+</html>

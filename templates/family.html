@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Family - PantryPal</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">PantryPal</div>
+    <div class="menu">
+        <a href="/">Dashboard</a>
+        <a href="/pantry">Pantry</a>
+        <a href="/recipes">Recipes</a>
+        <a href="/shopping">Shopping</a>
+        <a href="/family">Family</a>
+    </div>
+</nav>
+
+<main class="container">
+
+    <h1>My Family 👨‍👩‍👧‍👦</h1>
+    <p class="subtitle">สมาชิกที่ใช้คลังอาหารร่วมกัน</p>
+
+    <div class="cards">
+
+        {% for member in members %}
+
+        <div class="card">
+            <h3>👤 {{ member.username }}</h3>
+            <p>{{ member.email }}</p>
+            <span>{{ member.family_name }}</span>
+        </div>
+
+        {% else %}
+
+        <p>ยังไม่มีสมาชิกในครอบครัว</p>
+
+        {% endfor %}
+
+    </div>
+
+</main>
+
+</body>
+</html>
