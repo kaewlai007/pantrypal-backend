@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-page">
+   {% if item %}
+<h1>Edit Food ✏️</h1>
+<p>แก้ไขข้อมูลอาหารในคลัง</p>
+<form
+           method="POST"
+           action="{{ url_for(
+               'edit_pantry',
+               item_id=item.pantry_item_id
+           ) }}"
+           class="food-form"
+>
+   {% else %}
+<h1>Add Food 🥑</h1>
+<p>เพิ่มอาหารลงในคลังของครอบครัว</p>
+<form
+           method="POST"
+           action="{{ url_for('add_pantry') }}"
+           class="food-form"
+>
+   {% endif %}
+
+<div class="form-group">
+<label>
+               Food
+</label>
+<select
+               name="ingredient_id"
+               required
+>
+<option value="">
+                   -- Select Food --
+</option>
+
+               {% for ingredient in ingredients %}
+<option
+                       value="{{ ingredient.ingredient_id }}"
+                       {% if item and
+                             item.ingredient_id == ingredient.ingredient_id %}
+                           selected
+                       {% endif %}
+>
+                       {{ ingredient.ingredient_name }}
+                       ({{ ingredient.unit }})
+</option>
+               {% endfor %}
+</select>
+</div>
+
+<div class="form-group">
+<label>
+               Quantity
+</label>
+<input
+               type="number"
+               name="quantity"
+               step="0.01"
+               min="0.01"
+               required
+               {% if item %}
+                   value="{{ item.quantity }}"
+               {% endif %}
+>
+</div>
+
+<div class="form-group">
+<label>
+               Purchase Date
+</label>
+<input
+               type="date"
+               name="purchase_date"
+               {% if item and item.purchase_date %}
+                   value="{{ item.purchase_date }}"
+               {% endif %}
+>
+</div>
+
+<div class="form-group">
+<label>
+               Expiry Date
+</label>
+<input
+               type="date"
+               name="expiry_date"
+               {% if item and item.expiry_date %}
+                   value="{{ item.expiry_date }}"
+               {% endif %}
+>
+</div>
+
+<div class="form-actions">
+<a
+               href="{{ url_for('pantry') }}"
+               class="btn-cancel"
+>
+               Cancel
+</a>
+
+<button
+               type="submit"
+               class="btn-primary"
+>
+               {% if item %}
+                   Save Changes
+               {% else %}
+                   Add Food
+               {% endif %}
+</button>
+</div>
+
+</form>
+</div>
+{% endblock %}

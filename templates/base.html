@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PantryPal</title>
+<link rel="stylesheet"
+         href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header>
+<h1>🥬 PantryPal</h1>
+<nav>
+<a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
+<a href="{{ url_for('pantry') }}">🥑 My Pantry</a>
+<a href="{{ url_for('recipes') }}">🍳 Recipes</a>
+<a href="{{ url_for('shopping') }}">🛒 Shopping List</a>
+<a href="{{ url_for('family') }}">👨‍👩‍👧 My Family</a>
+<a href="{{ url_for('categories') }}">📁 Categories</a>
+</nav>
+</header>
+<main>
+       {% with messages = get_flashed_messages() %}
+           {% if messages %}
+               {% for message in messages %}
+<p>{{ message }}</p>
+               {% endfor %}
+           {% endif %}
+       {% endwith %}
+       {% block content %}{% endblock %}
+</main>
+</body>
+</html>

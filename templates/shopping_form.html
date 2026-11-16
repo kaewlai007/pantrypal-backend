@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Shopping Item</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<main class="container">
+
+    <h1>เพิ่มรายการซื้อของ 🛒</h1>
+
+    <form method="POST" class="food-form">
+
+        <label>วัตถุดิบ</label>
+
+        <select name="ingredient_id" required>
+            {% for ingredient in ingredients %}
+            <option value="{{ ingredient.ingredient_id }}">
+                {{ ingredient.ingredient_name }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <label>จำนวน</label>
+
+        <input type="number"
+               name="quantity"
+               min="0.01"
+               step="0.01"
+               required>
+
+        <button class="btn" type="submit">
+            เพิ่มรายการ
+        </button>
+
+        <a href="/shopping" class="cancel">ยกเลิก</a>
+
+    </form>
+
+</main>
+
+</body>
+</html>

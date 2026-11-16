@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>My Pantry 🌿</h1>
+
+        <p>
+            Manage your family's food inventory
+        </p>
+    </div>
+
+    <a href="{{ url_for('add_pantry') }}" class="btn-primary">
+        + Add Food
+    </a>
+
+</div>
+
+
+{% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+
+        <div class="flash-container">
+
+            {% for message in messages %}
+
+                <div class="flash-message">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+
+<div class="pantry-card">
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Food</th>
+
+                    <th>Quantity</th>
+
+                    <th>Purchase Date</th>
+
+                    <th>Expiry Date</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% if pantry_items %}
+
+                    {% for item in pantry_items %}
+
+                    <tr>
+
+                        <td>
+                            <strong>
+                                {{ item.ingredient_name }}
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            {{ item.quantity }}
+                            {{ item.unit }}
+                        </td>
+
+
+                        <td>
+                            {{ item.purchase_date or "-" }}
+                        </td>
+
+
+                        <td>
+
+                            {% if item.expiry_date %}
+
+                                {{ item.expiry_date }}
+
+                            {% else %}
+
+                                -
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="action-buttons">
+
+                                <a
+                                    href="{{ url_for(
+                                        'edit_pantry',
+                                        item_id=item.pantry_item_id
+                                    ) }}"
+                                    class="btn-edit"
+                                >
+                                    Edit
+                                </a>
+
+
+                                <form
+                                    action="{{ url_for(
+                                        'delete_pantry',
+                                        item_id=item.pantry_item_id
+                                    ) }}"
+                                    method="POST"
+                                    onsubmit="return confirm(
+                                        'ต้องการลบรายการนี้หรือไม่?'
+                                    );"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="btn-delete"
+                                    >
+                                        Delete
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <tr>
+
+                        <td colspan="5" class="empty-state">
+
+                            ยังไม่มีอาหารในคลัง
+
+                        </td>
+
+                    </tr>
+
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
